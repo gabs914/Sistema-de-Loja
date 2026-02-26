@@ -11,11 +11,10 @@ O tema foi escolhido por dois estudantes do terceiro ano do curso técnico em Te
 
 Funcionalidades Principais:
 
-Cadastro, edição e remoção de produtos
+Edição e remoção de produtos
 Controle de quantidade em estoque
 Registro de entradas e saídas de mercadorias
 Registro de vendas
-Previsão de Entradas do Sistema
 
 O sistema deverá receber:
 
