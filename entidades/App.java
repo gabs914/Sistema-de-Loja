@@ -1,41 +1,46 @@
-package entidades;
+package stockmanager_;
+
+import javax.swing.JOptionPane;
+import stockmanager_.entity.Produto;
+import stockmanager_db.ProdutoDAO;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        ProdutoDAO dao = new ProdutoDAO();
 
-        //Criar 5 produtos e exibir suas informações
-        
-        Produto produto1 = new Produto ("{-----Carne-----}", 15, 60);
-        
-       System.out.println(produto1.getNome());
-       System.out.println(produto1.getQuantidade());
-       System.out.println(produto1.getPreco());
+        try {
+            while (true) {
+                String[] opcoes = {"Cadastrar", "Excluir", "Ver Estoque", "Sair"};
+                int escolha = JOptionPane.showOptionDialog(null, "Escolha uma opção:", "Gerenciador de Estoque",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
 
-       Produto produto2 = new Produto ("{-----Arroz-----}", 100, 10);
-        
-       System.out.println(produto2.getNome());
-       System.out.println(produto2.getQuantidade());
-       System.out.println(produto2.getPreco());
-       
-       Produto produto3 = new Produto ("{-----Feijão-----}", 67, 15);
-        
-       System.out.println(produto3.getNome());
-       System.out.println(produto3.getQuantidade());
-       System.out.println(produto3.getPreco());
+                if (escolha == 0) { // Cadastrar
+                    String nome = JOptionPane.showInputDialog("Nome do produto:");
+                    if (nome == null) continue;
+                    int qtd = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
+                    double preco = Double.parseDouble(JOptionPane.showInputDialog("Preço:").replace(",", "."));
+                    
+                    dao.inserir(new Produto(nome, qtd, preco));
+                    dao.listar();
 
-        Produto produto4 = new Produto ("{-----Farinha-----}", 20, 12);
-        
-        System.out.println(produto4.getNome());
-       System.out.println(produto4.getQuantidade());
-       System.out.println(produto4.getPreco());
+                } else if (escolha == 1) { // Excluir
+                    dao.listar(); 
+                    String idStr = JOptionPane.showInputDialog("Digite o ID para excluir (veja no console):");
+                    if (idStr != null) {
+                        dao.deletar(Integer.parseInt(idStr));
+                        dao.listar();
+                    }
 
-        Produto produto5 = new Produto ("{-----Cerveja-----}", 9, 15);
-        
-       System.out.println(produto5.getNome());
-       System.out.println(produto5.getQuantidade());
-       System.out.println(produto5.getPreco());
+                } else if (escolha == 2) { // Ver Estoque
+                    dao.listar();
+                    JOptionPane.showMessageDialog(null, "Lista atualizada no console!");
 
+                } else { // Sair
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        }
     }
 }
-    
-
