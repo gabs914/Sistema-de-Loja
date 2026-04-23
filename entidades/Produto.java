@@ -1,20 +1,15 @@
-package entidades;
-
-//Criar a classe Produto com os atributos nome, quantidade e preço.//
+package stockmanager_.entity;
 
 public class Produto {
+
     private String nome;
     private int quantidade;
-    private int preco;
+    private double preco;
 
-    public Produto (String nome, int quantidade, int preco) {
+    public Produto(String nome, int quantidade, double preco) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.preco = preco;
-    }
-
-    public Produto(Object nome2, Object quantidade2, Object preco2) {
-        
     }
 
     public String getNome() {
@@ -25,8 +20,7 @@ public class Produto {
         return quantidade;
     }
 
-    public int getPreco() {
+    public double getPreco() {
         return preco;
     }
-
 }
